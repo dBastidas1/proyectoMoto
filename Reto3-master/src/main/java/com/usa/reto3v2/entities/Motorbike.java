@@ -3,7 +3,7 @@ package com.usa.reto3v2.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
+
 import java.io.Serializable;
 import java.util.List;
 
