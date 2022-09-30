@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,9 +19,26 @@ public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReservation;
-    private String startDate;
-    private String devolutionDate;
-    private String status;
+    private Date startDate;
+    private Date devolutionDate;
+    private String status="created";
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getDevolutionDate() {
+        return devolutionDate;
+    }
+
+    public void setDevolutionDate(Date devolutionDate) {
+        this.devolutionDate = devolutionDate;
+    }
+
     @ManyToOne
     @JoinColumn(name = "motorbikeId")
     @JsonIgnoreProperties("reservations")
@@ -49,21 +67,9 @@ public class Reservation implements Serializable {
         this.idReservation = idReservation;
     }
 
-    public String getStartDate() {
-        return startDate;
-    }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
 
-    public String getDevolutionDate() {
-        return devolutionDate;
-    }
 
-    public void setDevolutionDate(String devolutionDate) {
-        this.devolutionDate = devolutionDate;
-    }
 
     public String getStatus() {
         return status;
