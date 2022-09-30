@@ -1,33 +1,38 @@
 package com.usa.reto3v2.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "motorbike")
 public class Motorbike implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String brand;
-    private Integer year;
     private String name;
+    private String brand;
     private String description;
+    private Integer year;
     @ManyToOne
     @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("motorbike")
     private Category category;
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "motorbike")
-    @JsonIgnoreProperties("motorbike")
-    private List<Reservation> reservations;
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "motorbike")
-    @JsonIgnoreProperties("motorbike")
+    @JsonIgnoreProperties({"motorbike","client"})
     private List<Message> messages;
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "motorbike")
+    @JsonIgnoreProperties({"motorbike","messages"})
+    private List<Reservation> reservations;
+
 
     public Integer getId() {
         return id;

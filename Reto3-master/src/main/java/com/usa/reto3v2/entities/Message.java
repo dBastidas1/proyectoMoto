@@ -1,11 +1,17 @@
 package com.usa.reto3v2.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "message")
 public class Message implements Serializable {
     @Id
@@ -13,21 +19,14 @@ public class Message implements Serializable {
     private Integer idMessage;
     private String messageText;
     @ManyToOne
-    @JoinColumn(name = "idClient")
-    @JsonIgnoreProperties("message")
-    private Client client;
-    @ManyToOne
     @JoinColumn(name = "motorbikeId")
-    @JsonIgnoreProperties("message")
+    @JsonIgnoreProperties({"messages","reservations"})
     private Motorbike motorbike;
+
     @ManyToOne
-    @JoinColumn(name = "idReservation")
-    @JsonIgnoreProperties("message")
-    private Reservation reservation;
-    @ManyToOne
-    @JoinColumn(name = "CategoryId")
-    @JsonIgnoreProperties("message")
-    private Category category;
+    @JoinColumn(name = "idClient")
+    @JsonIgnoreProperties({"messages","reservations"})
+    private Client client;
 
     public Integer getIdMessage() {
         return idMessage;
@@ -61,19 +60,9 @@ public class Message implements Serializable {
         this.motorbike = motorbike;
     }
 
-    public Reservation getReservation() {
-        return reservation;
-    }
 
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
-    }
 
-    public Category getCategory() {
-        return category;
-    }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+
+
 }

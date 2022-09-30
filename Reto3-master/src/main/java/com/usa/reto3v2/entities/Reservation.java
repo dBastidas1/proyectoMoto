@@ -1,12 +1,18 @@
 package com.usa.reto3v2.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "reservation")
 public class Reservation implements Serializable {
     @Id
@@ -15,23 +21,25 @@ public class Reservation implements Serializable {
     private String startDate;
     private String devolutionDate;
     private String status;
-    private Integer score;
     @ManyToOne
     @JoinColumn(name = "motorbikeId")
     @JsonIgnoreProperties("reservation")
     private Motorbike motorbike;
     @ManyToOne
     @JoinColumn(name = "clientId")
-    @JsonIgnoreProperties("reservation")
+    @JsonIgnoreProperties({"reservation","messages"})
     private Client client;
-    @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @OneToOne(cascade = {CascadeType.REMOVE},mappedBy="reservation")
     @JsonIgnoreProperties("reservation")
-    private Category category;
+    private Score score;
 
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "reservation")
-    @JsonIgnoreProperties("reservation")
-    private List<Message> messages;
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
 
     public Integer getIdReservation() {
         return idReservation;
@@ -65,13 +73,6 @@ public class Reservation implements Serializable {
         this.status = status;
     }
 
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
 
     public Motorbike getMotorbike() {
         return motorbike;
@@ -89,19 +90,8 @@ public class Reservation implements Serializable {
         this.client = client;
     }
 
-    public Category getCategory() {
-        return category;
-    }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
-    public List<Message> getMessages() {
-        return messages;
-    }
 
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
+
 }

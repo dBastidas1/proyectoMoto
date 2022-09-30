@@ -1,11 +1,17 @@
 package com.usa.reto3v2.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "category")
 public class Category implements Serializable {
 
@@ -17,9 +23,6 @@ public class Category implements Serializable {
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "category")
     @JsonIgnoreProperties("category")
     private List<Motorbike> motorbikes;
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "category")
-    @JsonIgnoreProperties("category")
-    private List<Reservation> reservations;
 
     public Integer getId() {
         return id;
@@ -51,13 +54,5 @@ public class Category implements Serializable {
 
     public void setMotorbikes(List<Motorbike> motorbikes) {
         this.motorbikes = motorbikes;
-    }
-
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
     }
 }

@@ -49,15 +49,11 @@ public class ReservationService {
                 if(p.getScore()!=null){
                     q.get().setScore(p.getScore());
                 }
-                if(p.getCategory()!=null){
-                    q.get().setCategory(p.getCategory());
-                }
+
                 if(p.getMotorbike()!=null){
                     q.get().setMotorbike(p.getMotorbike());
                 }
-                if(p.getMessages()!=null){
-                    q.get().setMessages(p.getMessages());
-                }
+
                 if(p.getClient()!=null){
                     q.get().setClient(p.getClient());
                 }
