@@ -20,11 +20,12 @@ public class Motorbike implements Serializable {
     private Integer id;
     private String name;
     private String brand;
-    private String description;
     private Integer year;
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("motorbike")
+    @JsonIgnoreProperties("motorbikes")
     private Category category;
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "motorbike")
     @JsonIgnoreProperties({"motorbike","client"})
