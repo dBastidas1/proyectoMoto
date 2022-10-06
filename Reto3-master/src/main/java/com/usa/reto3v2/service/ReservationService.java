@@ -33,47 +33,34 @@ public class ReservationService {
             }
         }
     }
-    public Reservation update(Reservation p){
-        if(p.getIdReservation()!=null){
-            Optional<Reservation> q = reservationRepository.getReservation(p.getIdReservation());
-            if(q.isPresent()){
-                if(p.getStartDate()!=null){
-                    q.get().setStartDate(p.getStartDate());
-                }
-                if(p.getDevolutionDate()!=null){
-                    q.get().setDevolutionDate(p.getDevolutionDate());
-                }
-                if(p.getStatus()!=null){
-                    q.get().setStatus(p.getStatus());
-                }
-                if(p.getScore()!=null){
-                    q.get().setScore(p.getScore());
-                }
+    public Reservation update(Reservation reservation){
+        if(reservation.getIdReservation()!=null){
+            Optional<Reservation> e= reservationRepository.getReservation(reservation.getIdReservation());
+            if(e.isPresent()){
 
-                if(p.getMotorbike()!=null){
-                    q.get().setMotorbike(p.getMotorbike());
+                if(reservation.getStartDate()!=null){
+                    e.get().setStartDate(reservation.getStartDate());
                 }
-
-                if(p.getClient()!=null){
-                    q.get().setClient(p.getClient());
+                if(reservation.getDevolutionDate()!=null){
+                    e.get().setDevolutionDate(reservation.getDevolutionDate());
                 }
-
-                reservationRepository.save(q.get());
-                return q.get();
+                if(reservation.getStatus()!=null){
+                    e.get().setStatus(reservation.getStatus());
+                }
+                reservationRepository.save(e.get());
+                return e.get();
             }else{
-                return p;
+                return reservation;
             }
         }else{
-            return p;
+            return reservation;
         }
     }
-    public boolean delete(int id){
-        boolean flag=false;
-        Optional<Reservation>p= reservationRepository.getReservation(id);
-        if(p.isPresent()){
-            reservationRepository.delete(p.get());
-            flag=true;
-        }
-        return flag;
+    public boolean deleteReservation(int id){
+        boolean d = getReservation(id).map(reservation -> {
+            reservationRepository.delete(reservation);
+            return true;
+        }).orElse(false);
+        return d;
     }
 }

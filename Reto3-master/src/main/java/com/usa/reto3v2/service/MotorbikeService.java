@@ -36,48 +36,40 @@ public class MotorbikeService {
             }
         }
     }
-    public Motorbike update(Motorbike p){
-        if(p.getId()!=null){
-            Optional<Motorbike> q = motorbikeRepository.getMotorbike(p.getId());
-            if(q.isPresent()){
-                if(p.getBrand()!=null){
-                    q.get().setBrand(p.getBrand());
+    public Motorbike update(Motorbike motorbike){
+        if(motorbike.getId()!=null){
+            Optional<Motorbike> e= motorbikeRepository.getMotorbike(motorbike.getId());
+            if(e.isPresent()){
+                if(motorbike.getName()!=null){
+                    e.get().setName(motorbike.getName());
                 }
-                if(p.getName()!=null){
-                    q.get().setName(p.getName());
+                if(motorbike.getBrand()!=null){
+                    e.get().setBrand(motorbike.getBrand());
                 }
-                if(p.getYear()!=null){
-                    q.get().setYear(p.getYear());
+                if(motorbike.getYear()!=null){
+                    e.get().setYear(motorbike.getYear());
                 }
-                if(p.getDescription()!=null){
-                    q.get().setDescription(p.getDescription());
+                if(motorbike.getDescription()!=null){
+                    e.get().setDescription(motorbike.getDescription());
                 }
-                if(p.getCategory()!=null){
-                    q.get().setCategory(p.getCategory());
+                if(motorbike.getCategory()!=null){
+                    e.get().setCategory(motorbike.getCategory());
                 }
-                if(p.getMessages()!=null){
-                    q.get().setMessages(p.getMessages());
-                }
-                if(p.getReservations()!=null){
-                    q.get().setReservations(p.getReservations());
-                }
-                motorbikeRepository.save(q.get());
-                return q.get();
+                motorbikeRepository.save(e.get());
+                return e.get();
             }else{
-                return p;
+                return motorbike;
             }
         }else{
-            return p;
+            return motorbike;
         }
     }
-    public boolean delete(int id){
-        boolean flag=false;
-        Optional<Motorbike>p= motorbikeRepository.getMotorbike(id);
-        if(p.isPresent()){
-            motorbikeRepository.delete(p.get());
-            flag=true;
-        }
-        return flag;
+    public boolean deleteMotorbike(int id){
+        boolean d = getMotorbike(id).map(motorbike -> {
+            motorbikeRepository.delete(motorbike);
+            return true;
+        }).orElse(false);
+        return d;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.usa.reto3v2.service;
 
+import com.usa.reto3v2.entities.Category;
 import com.usa.reto3v2.entities.Client;
 import com.usa.reto3v2.repository.ClientRepository;
 import org.springframework.stereotype.Service;
@@ -33,44 +34,33 @@ public class ClientService {
             }
         }
     }
-    public Client update(Client p){
-        if(p.getIdClient()!=null){
-            Optional<Client> q = clientRepository.getClient(p.getIdClient());
-            if(q.isPresent()){
-                if(p.getName()!=null){
-                    q.get().setName(p.getName());
+    public Client update(Client client){
+        if(client.getIdClient()!=null){
+            Optional<Client> e= clientRepository.getClient(client.getIdClient());
+            if(e.isPresent()){
+                if(client.getName()!=null){
+                    e.get().setName(client.getName());
                 }
-                if(p.getEmail()!=null){
-                    q.get().setEmail(p.getEmail());
+                if(client.getAge()!=null){
+                    e.get().setAge(client.getAge());
                 }
-                if(p.getPassword()!=null){
-                    q.get().setPassword(p.getPassword());
+                if(client.getPassword()!=null){
+                    e.get().setPassword(client.getPassword());
                 }
-                if(p.getAge()!=null){
-                    q.get().setAge(p.getAge());
-                }
-                if(p.getMessages()!=null){
-                    q.get().setMessages(p.getMessages());
-                }
-                if(p.getReservations()!=null){
-                    q.get().setReservations(p.getReservations());
-                }
-                clientRepository.save(q.get());
-                return q.get();
+                clientRepository.save(e.get());
+                return e.get();
             }else{
-                return p;
+                return client;
             }
         }else{
-            return p;
+            return client;
         }
     }
-    public boolean delete(int id){
-        boolean flag=false;
-        Optional<Client>p= clientRepository.getClient(id);
-        if(p.isPresent()){
-            clientRepository.delete(p.get());
-            flag=true;
-        }
-        return flag;
+    public boolean deleteClient(int id){
+        boolean d = getClient(id).map(client -> {
+            clientRepository.delete(client);
+            return true;
+        }).orElse(false);
+        return d;
     }
 }

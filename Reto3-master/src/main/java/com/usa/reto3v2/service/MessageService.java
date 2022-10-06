@@ -32,36 +32,27 @@ public class MessageService {
             }
         }
     }
-    public Message update(Message p){
-        if(p.getIdMessage()!=null){
-            Optional<Message> q = messageRepository.getMessage(p.getIdMessage());
-            if(q.isPresent()){
-                if(p.getMessageText()!=null){
-                    q.get().setMessageText(p.getMessageText());
+    public Message update(Message message){
+        if(message.getIdMessage()!=null){
+            Optional<Message> e= messageRepository.getMessage(message.getIdMessage());
+            if(e.isPresent()){
+                if(message.getMessageText()!=null){
+                    e.get().setMessageText(message.getMessageText());
                 }
-                if(p.getMotorbike()!=null){
-                    q.get().setMotorbike(p.getMotorbike());
-                }
-                if(p.getClient()!=null){
-                    q.get().setClient(p.getClient());
-                }
-
-                messageRepository.save(q.get());
-                return q.get();
+                messageRepository.save(e.get());
+                return e.get();
             }else{
-                return p;
+                return message;
             }
         }else{
-            return p;
+            return message;
         }
     }
-    public boolean delete(int id){
-        boolean flag=false;
-        Optional<Message>p= messageRepository.getMessage(id);
-        if(p.isPresent()){
-            messageRepository.delete(p.get());
-            flag=true;
-        }
-        return flag;
+    public boolean deleteMessage(int id){
+        boolean d = getMessage(id).map(message -> {
+            messageRepository.delete(message);
+            return true;
+        }).orElse(false);
+        return d;
     }
 }
