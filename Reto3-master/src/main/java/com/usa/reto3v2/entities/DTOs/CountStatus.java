@@ -6,7 +6,7 @@ public class CountStatus {
 
     public CountStatus(Long completed, Long cancelled){
         this.completed = completed;
-        this.completed = cancelled;
+        this.cancelled = cancelled;
     }
 
     public Long getCompleted() {
