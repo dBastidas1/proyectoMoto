@@ -1,5 +1,7 @@
 package com.usa.reto3v2.controller;
 
+import com.usa.reto3v2.entities.DTOs.CountClient;
+import com.usa.reto3v2.entities.DTOs.CountStatus;
 import com.usa.reto3v2.entities.Message;
 import com.usa.reto3v2.entities.Reservation;
 import com.usa.reto3v2.service.ReservationService;
@@ -38,5 +40,18 @@ public class ReservationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete (@PathVariable("id") int id){
         return reservationService.deleteReservation(id);
+    }
+
+    @GetMapping("/report-clients")
+    public List<CountClient> getReportTopClients(){
+        return reservationService.getTopClients();
+    }
+    @GetMapping("/report-dates/{dateOne}/dateTwo")
+    public List<Reservation> getReportReservationDate(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo){
+        return reservationService.getReservationPeriod(dateOne, dateTwo);
+    }
+    @GetMapping("/report-status")
+    public CountStatus getReportStatusReservations(){
+        return  reservationService.getReservationsStatus();
     }
 }

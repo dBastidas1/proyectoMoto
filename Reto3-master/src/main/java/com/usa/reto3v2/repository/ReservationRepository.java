@@ -1,10 +1,14 @@
 package com.usa.reto3v2.repository;
 
+import com.usa.reto3v2.entities.Client;
+import com.usa.reto3v2.entities.DTOs.CountClient;
 import com.usa.reto3v2.entities.Reservation;
 import com.usa.reto3v2.repository.crudRepository.ReservationCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,5 +28,22 @@ public class ReservationRepository {
     }
     public void delete(Reservation p){
         reservationCrudRepository.delete(p);
+    }
+    public List<CountClient> getTopClients(){
+        List<CountClient> respuesta = new ArrayList<>();
+
+        List<Object[]> reporte = reservationCrudRepository.countTotalReservationsByClients();
+
+        for(int i= 0; i<reporte.size(); i++){
+            respuesta.add(new CountClient((Long) reporte.get(i)[1], (Client) reporte.get(i)[0] ));
+        }
+
+       return respuesta;
+    }
+    public List<Reservation> getReservationPerod(Date a, Date b){
+        return reservationCrudRepository.findAllByStartDateAfterAndDevolutionDateBefore(a, b);
+    }
+    public List<Reservation> getReservationByStatus(String status){
+        return reservationCrudRepository.findAllByStatus(status);
     }
 }
