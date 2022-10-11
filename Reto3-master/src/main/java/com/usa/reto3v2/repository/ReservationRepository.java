@@ -40,7 +40,7 @@ public class ReservationRepository {
 
        return respuesta;
     }
-    public List<Reservation> getReservationPerod(Date a, Date b){
+    public List<Reservation> getReservationPeriod(Date a, Date b){
         return reservationCrudRepository.findAllByStartDateAfterAndDevolutionDateBefore(a, b);
     }
     public List<Reservation> getReservationByStatus(String status){

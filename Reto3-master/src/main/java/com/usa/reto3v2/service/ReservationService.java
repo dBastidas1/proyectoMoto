@@ -18,7 +18,7 @@ import java.util.Optional;
 public class ReservationService {
 
     @Autowired
-    private static ReservationRepository reservationRepository;
+    private  ReservationRepository reservationRepository;
 
     public List<Reservation> getAll(){
         return reservationRepository.getAll();
@@ -87,7 +87,7 @@ public class ReservationService {
             excepcion.printStackTrace();
         }
         if (a.before(b)){
-            return reservationRepository.getReservationPerod(a, b);
+            return reservationRepository.getReservationPeriod(a, b);
         }else{
             return new ArrayList<>();
         }
