@@ -51,7 +51,7 @@ var logout = function () {
 //Funciones del <select> Reservacion
 $(document).ready(function(){
     traerInformacionR();
-    $.get("http://localhost:20000/user",function(data){
+    $.get("/user",function(data){
         console.log(data.name);
         $("#userloginname").html(data.name);
         // document.getElementById("userloginname").innerHTML =data.login;
@@ -61,7 +61,7 @@ $(document).ready(function(){
 // Rutina para taer las Reservacion a un <select>
 function traerInformacionR(){
     $.ajax({
-        url:"http://localhost:20000/api/Reservation/all",
+        url:"/api/Reservation/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuestaR){
@@ -88,7 +88,7 @@ $(document).ready(function(){
 // Rutina para taer las Calificaciones
 function traerInformacionScore(){
     $.ajax({
-        url:"http://localhost:20000/api/Score/all",
+        url:"/api/Score/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuestaScore){
@@ -134,7 +134,7 @@ function guardarElementoScore(){
         contentType: "application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(myData),
-        url:"http://localhost:20000/api/Score/save",
+        url:"/api/Score/save",
         success:function(response) {
             console.log(response);
             console.log("La Calificacion se Guardo Correctamente");

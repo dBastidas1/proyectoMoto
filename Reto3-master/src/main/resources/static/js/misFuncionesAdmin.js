@@ -51,7 +51,7 @@ var logout = function () {
 //Funciones de la tabla Administrador
 $(document).ready(function (){
     traerInformacionAdmin();
-    $.get("http://localhost:20000/user",function(data){
+    $.get("/user",function(data){
         console.log(data.name);
         $("#userloginname").html(data.name);
         // document.getElementById("userloginname").innerHTML =data.login;
@@ -61,7 +61,7 @@ $(document).ready(function (){
 //Funcion que trae la informacion de la tabla Administrador
 function traerInformacionAdmin(){
     $.ajax({
-        url:"http://localhost:20000/api/Admin/all", //colocar la http del modulo de la tabla CLIENT
+        url:"/api/Admin/all", //colocar la http del modulo de la tabla CLIENT
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -99,7 +99,7 @@ function guardarElementoAdmin(){
         dataType: 'JSON',
         data: JSON.stringify(myData),
         
-        url:"http://localhost:20000/api/Admin/save",
+        url:"/api/Admin/save",
        
         
         success:function(response) {
@@ -129,7 +129,7 @@ function actualizarElementoAdmin(idElemento){
     console.log(myData);
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"http://localhost:20000/api/Admin/update", //colocar la http del modulo de la tabla CLIENT
+        url:"/api/Admin/update", //colocar la http del modulo de la tabla CLIENT
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",
@@ -156,7 +156,7 @@ function borrarElementoAdmin(idElemento){
     };
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"http://localhost:20000/api/Admin/"+idElemento,
+        url:"/api/Admin/"+idElemento,
         type:"DELETE",
         data:dataToSend,
         contentType:"application/JSON",

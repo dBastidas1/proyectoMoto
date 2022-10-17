@@ -41,7 +41,7 @@ function pintarRespuestaC(respuestaC){
 //Funciones de la tabla Motorbike
 $(document).ready(function (){
     traerInformacionMotorbike();
-    $.get("http://localhost:20000/user",function(data){
+    $.get("/user",function(data){
         console.log(data.name);
         $("#userloginname").html(data.name);
         // document.getElementById("userloginname").innerHTML =data.login;
@@ -51,7 +51,7 @@ $(document).ready(function (){
 //Funcione que trae la informacion de Motorbike
 function traerInformacionMotorbike(){
     $.ajax({
-        url:"http://localhost:20000/api/Motorbike/all",
+        url:"/api/Motorbike/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuestaMotorbike){
@@ -95,7 +95,7 @@ function guardarElementoMotorbike(){
         contentType: "application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(myData),
-        url:"http://localhost:20000/api/Motorbike/save",
+        url:"/api/Motorbike/save",
         success:function(response) {
             console.log(response);
             console.log("La motocicleta se guardó correctamente");
@@ -121,7 +121,7 @@ function actualizarElementoMotorbike(idElemento){
     console.log(myData);
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"http://localhost:20000/api/Motorbike/update", //colocar la http del modulo de la tabla CLIENT
+        url:"/api/Motorbike/update", //colocar la http del modulo de la tabla CLIENT
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",
@@ -145,7 +145,7 @@ function borrarElementoMotorbike(idElemento){
     };
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"http://localhost:20000/api/Motorbike/"+idElemento,
+        url:"/api/Motorbike/"+idElemento,
         type:"DELETE",
         data:dataToSend,
         contentType:"application/JSON",

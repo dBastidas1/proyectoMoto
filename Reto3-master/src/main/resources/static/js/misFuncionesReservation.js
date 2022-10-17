@@ -16,7 +16,7 @@ var logout = function () {
 // Rutina para taer los Clientes a un <select>
 function traerInformacionC(){
     $.ajax({
-        url:"http://localhost:20000/api/Client/all",
+        url:"/api/Client/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuestaC){
@@ -27,7 +27,7 @@ function traerInformacionC(){
 }
 $(document).ready(function (){
     traerInformacionC();
-    $.get("http://localhost:20000/user",function(data){
+    $.get("/user",function(data){
         console.log(data.name);
         $("#userloginname").html(data.name);
         // document.getElementById("userloginname").innerHTML =data.login;
@@ -46,7 +46,7 @@ function pintarRespuestaC(respuestaC){
 // Rutina para taer las motocicletas a un <select>
 function traerInformacionG(){
     $.ajax({
-        url:"http://localhost:20000/api/Motorbike/all",
+        url:"/api/Motorbike/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuestaG){
@@ -77,7 +77,7 @@ $(document).ready(function (){
 //Funcione que trae la informacion de Reservation
 function traerInformacionReservation(){
     $.ajax({
-        url:"http://localhost:20000/api/Reservation/all",
+        url:"/api/Reservation/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuestaReservation){
@@ -154,7 +154,7 @@ function actualizarElementoReservation(idElemento){
     console.log(myData);
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"http://localhost:20000/api/Reservation/update", //colocar la http del modulo de la tabla CLIENT
+        url:"/api/Reservation/update", //colocar la http del modulo de la tabla CLIENT
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",
@@ -182,7 +182,7 @@ function borrarElementoReservation(idElemento){
     };
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"http://localhost:20000/api/Reservation/"+idElemento,
+        url:"/api/Reservation/"+idElemento,
         type:"DELETE",
         data:dataToSend,
         contentType:"application/JSON",

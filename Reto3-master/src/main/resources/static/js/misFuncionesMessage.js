@@ -52,7 +52,7 @@ var logout = function () {
 // Rutina para taer las Clientes a un <select>
 function traerInformacionC(){
     $.ajax({
-        url:"http://localhost:20000/api/Client/all",
+        url:"/api/Client/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuestaC){
@@ -63,7 +63,7 @@ function traerInformacionC(){
 }
 $(document).ready(function (){
     traerInformacionC();
-    $.get("http://localhost:20000/user",function(data){
+    $.get("/user",function(data){
         console.log(data.name);
         $("#userloginname").html(data.name);
         // document.getElementById("userloginname").innerHTML =data.login;
@@ -83,7 +83,7 @@ function pintarRespuestaC(respuestaC){
 // Rutina para taer los Juegos a un <select>
 function traerInformacionG(){
     $.ajax({
-        url:"http://localhost:20000/api/Motorbike/all",
+        url:"/api/Motorbike/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuestaG){
@@ -112,7 +112,7 @@ $(document).ready(function (){
 //Funcione que trae la informacion de Message
 function traerInformacionMessage(){
     $.ajax({
-        url:"http://localhost:20000/api/Message/all",
+        url:"/api/Message/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuestaMessage){
@@ -152,7 +152,7 @@ function guardarElementoMessage(){
         contentType: "application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(myData),
-        url:"http://localhost:20000/api/Message/save",
+        url:"/api/Message/save",
         success:function(response) {
             console.log(response);
             console.log("El Mensaje se Guardo Correctamente");
@@ -177,7 +177,7 @@ function actualizarElementoMessage(idElemento){
     console.log(myData);
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"http://localhost:20000/api/Message/update", //colocar la http del modulo de la tabla CLIENT
+        url:"/api/Message/update", //colocar la http del modulo de la tabla CLIENT
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",
@@ -200,7 +200,7 @@ function borrarElementoMessage(idElemento){
     };
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"http://localhost:20000/api/Message/"+idElemento,
+        url:"/api/Message/"+idElemento,
         type:"DELETE",
         data:dataToSend,
         contentType:"application/JSON",

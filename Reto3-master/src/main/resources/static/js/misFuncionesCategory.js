@@ -51,7 +51,7 @@ var logout = function () {
 //Funciones de la tabla Category
 $(document).ready(function (){
     traerInformacionCategory();
-    $.get("http://localhost:20000/user",function(data){
+    $.get("/user",function(data){
         console.log(data.name);
         $("#userloginname").html(data.name);
         // document.getElementById("userloginname").innerHTML =data.login;
@@ -61,7 +61,7 @@ $(document).ready(function (){
 //Funcione que trae la informacion de Category
 function traerInformacionCategory(){
     $.ajax({
-        url:"http://localhost:20000/api/Category/all",
+        url:"/api/Category/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuestaCategory){
@@ -97,7 +97,7 @@ function guardarElementoCategory(){
         contentType: "application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(myData),
-        url:"http://localhost:20000/api/Category/save",
+        url:"/api/Category/save",
         success:function(response) {
             console.log(response);
             console.log("La Categoria se Guardo Correctamente");
@@ -120,7 +120,7 @@ function actualizarElementoCategory(idElemento){
     console.log(myData);
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"http://localhost:20000/api/Category/update", //colocar la http del modulo de la tabla CLIENT
+        url:"/api/Category/update", //colocar la http del modulo de la tabla CLIENT
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",
@@ -142,7 +142,7 @@ function borrarElementoCategory(idElemento){
     };
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"http://localhost:20000/api/Category/"+idElemento,
+        url:"/api/Category/"+idElemento,
         type:"DELETE",
         data:dataToSend,
         contentType:"application/JSON",

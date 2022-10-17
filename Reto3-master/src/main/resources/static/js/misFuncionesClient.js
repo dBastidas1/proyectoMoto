@@ -50,7 +50,7 @@ var logout = function () {
 //Funciones de la tabla CLiente
 $(document).ready(function (){
     traerInformacionClientes();
-    $.get("http://localhost:20000/user",function(data){
+    $.get("/user",function(data){
         console.log(data.name);
         $("#userloginname").html(data.name);
         // document.getElementById("userloginname").innerHTML =data.login;
@@ -61,7 +61,7 @@ $(document).ready(function (){
 //Funcione que trae la informacion de Client
 function traerInformacionClientes(){
     $.ajax({
-        url:"http://localhost:20000/api/Client/all", //colocar la http del modulo de la tabla CLIENT
+        url:"/api/Client/all", //colocar la http del modulo de la tabla CLIENT
         type:"GET",
         datatype:"JSON",
         success:function(respuestaC){
@@ -100,7 +100,7 @@ function guardarElementoClient(){
         contentType: "application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(myDataC),
-        url:"http://localhost:20000/api/Client/save",
+        url:"/api/Client/save",
         success:function(responseC) {
             console.log(responseC);
             console.log("Se guardo correctamente");
@@ -125,7 +125,7 @@ function actualizarElementoClient(idElementoC){
     console.log(myDataC);
     let dataToSend=JSON.stringify(myDataC);
     $.ajax({
-        url:"http://localhost:20000/api/Client/update", //colocar la http del modulo de la tabla CLIENT
+        url:"/api/Client/update", //colocar la http del modulo de la tabla CLIENT
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",
@@ -152,7 +152,7 @@ function borrarElementoClient(idElementoC){
     };
     let dataToSend=JSON.stringify(myDataC);
     $.ajax({
-        url:"http://localhost:20000/api/Client/"+idElementoC,
+        url:"/api/Client/"+idElementoC,
         type:"DELETE",
         data:dataToSend,
         contentType:"application/JSON",
